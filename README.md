@@ -2,14 +2,19 @@
 
 Install
 =======
-copy csgotvsux.exe into your csgo folder (SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo/csgotvsux.exe)
+copy csgotvsux.exe into your csgo folder
+
+(SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo/csgotvsux.exe)
 
 
 Usage
 =====
 1.) start csgotvsux.exe
+
 2.) start csgo demo
+
 3.) open csgo console
+
 4.) type "exec playback" [RETURN]
 
 
@@ -30,10 +35,13 @@ NUMPAD 0-9	select round number (two digits)
 Examples
 --------
 jump to warmup
+
 [NUMPAD_DEL][NUMPAD_0][NUMPAD_0]
 
 jump to round 12
+
 [NUMPAD_DEL][NUMPAD_1][NUMPAD_2]
 
 jump to round 3
+
 [NUMPAD_DEL][NUMPAD_0][NUMPAD_3]
