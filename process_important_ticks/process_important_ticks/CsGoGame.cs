@@ -69,7 +69,7 @@ namespace process_important_ticks
             sb.AppendLine();
             for (int i = 0; i < 30; i++)
             {
-                sb.AppendLine("alias \"jump_to_round_" + (i + 1) + "_reset\" \"jump_to_round_" + (i + 1) + ";press_num_reset;\"");
+                sb.AppendLine("alias \"jump_to_round_" + (i + 1) + "_reset\" \"press_num_reset;jump_to_round_" + (i + 1) + ";\"");
             }
             sb.AppendLine();
 
@@ -93,7 +93,7 @@ namespace process_important_ticks
                     int rnum = (i * 10 + j);
                     if (rnum <= 30)
                     {
-                        sb.Append("alias press_num_" + j + " jump_to_round_" + rnum + ";");
+                        sb.Append("alias press_num_" + j + " jump_to_round_" + rnum + "_reset;");
                     }
                     else
                     {

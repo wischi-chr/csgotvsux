@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -15,6 +15,10 @@ namespace process_important_ticks
         {
             //Get current working Dir
             var path = Directory.GetCurrentDirectory();
+
+            //Override local csgo location
+            OverrideDebugPath(ref path);
+
             if (!path.ToLower().EndsWith(@"\steamapps\common\Counter-Strike Global Offensive\csgo".ToLower()))
             {
                 Console.WriteLine("Nicht im CS:GO Verzeichnis!");
@@ -23,7 +27,7 @@ namespace process_important_ticks
             }
 
             //string csgoPath = @"D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\csgo\";
-            string writeScript = Path.Combine(path, "cfg", "playback_game.cfg");
+            string writeScript = Path.Combine(path, @"cfg\playback_game.cfg");
             string consoleLog = Path.Combine(path, "console.log");
             string lastHash = "";
 
@@ -47,6 +51,14 @@ namespace process_important_ticks
                 Console.WriteLine(spacer);
                 Console.WriteLine();
             }
+        }
+
+        [Conditional("DEBUG")]
+        static void OverrideDebugPath(ref string path)
+        {
+            //override only if debugger is attached
+            if (Debugger.IsAttached)
+                path = @"D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\csgo";
         }
     }
 }

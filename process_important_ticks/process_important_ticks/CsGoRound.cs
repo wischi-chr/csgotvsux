@@ -34,6 +34,9 @@ namespace process_important_ticks
             for (int i = 0; i < start_ticks.Count - 1; i++)
                 yield return new CsGoRound(events.Where(e => e.Tick >= start_ticks[i] && e.Tick < start_ticks[i + 1]).OrderBy(e => e.Tick).ToArray());
 
+            if (start_ticks.Count > 0)
+                yield return new CsGoRound(events.Where(e => e.Tick >= start_ticks[start_ticks.Count - 1]).OrderBy(e => e.Tick).ToArray());
+
         }
     }
 }
