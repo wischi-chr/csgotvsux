@@ -7,8 +7,8 @@
     <ProjectGuid>{47165CB7-CEB9-4DF1-BC00-D13F97A634B2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>process_important_ticks</RootNamespace>
-    <AssemblyName>process_important_ticks</AssemblyName>
+    <RootNamespace>csgotvsux</RootNamespace>
+    <AssemblyName>csgotvsux</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -48,6 +48,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReverseFileReader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="res\playback.cfg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

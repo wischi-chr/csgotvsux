@@ -5,16 +5,23 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace process_important_ticks
+namespace csgotvsux
 {
     public class CsGoGame
     {
         public string GameHash { get { return game_hash; } }
 
+        public int NumOfRounds { get { return num_rounds_drill + num_rounds_warmup; } }
+        public int NumOfRoundsDrill { get { return num_rounds_drill; } }
+        public int NumOfRoundsWarmup { get { return num_rounds_warmup; } }
+
         private static readonly string beginTag = "==BEGIN=BEGIN==[IMPORTANT_TICKS]==BEGIN=BEGIN==";
         private static readonly string endTag = "==END=END=END==[IMPORTANT_TICKS]==END=END=END==";
         private readonly CsGoRound[] rounds;
         private readonly string game_hash;
+
+        private readonly int num_rounds_warmup;
+        private readonly int num_rounds_drill;
 
         public static CsGoGame LastFromLogFile(string Name)
         {
@@ -48,6 +55,14 @@ namespace process_important_ticks
 
             var events = Events.Select(e => CsGoEvent.Parse(e)).ToArray();
             rounds = CsGoRound.FromEvents(events).ToArray();
+
+            num_rounds_drill = 0;
+            num_rounds_warmup = 0;
+            foreach (var r in rounds)
+            {
+                if (r.IsWarmup) num_rounds_warmup++;
+                else num_rounds_drill++;
+            }
         }
 
         public void WriteDemoNavScript(string name)

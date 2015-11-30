@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 
-namespace process_important_ticks
+namespace csgotvsux
 {
     class Program
     {
@@ -26,15 +27,28 @@ namespace process_important_ticks
                 return;
             }
 
-            //string csgoPath = @"D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\csgo\";
-            string writeScript = Path.Combine(path, @"cfg\playback_game.cfg");
+            //setup locations
+            string mainScriptName = @"cfg\playback.cfg";
+            string gameScriptName = @"cfg\playback_game.cfg";
             string consoleLog = Path.Combine(path, "console.log");
+            string mainScript = Path.Combine(path, mainScriptName);
+            string gameScript = Path.Combine(path, gameScriptName);
+
+            //write playback.cfg
+            using (var cfgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("csgotvsux.res.playback.cfg"))
+                if (cfgStream != null)
+                    using (var reader = new StreamReader(cfgStream))
+                    {
+                        Console.WriteLine("Write {0}", mainScriptName);
+                        File.WriteAllText(mainScript, reader.ReadToEnd());
+                    }
+
+
             string lastHash = "";
 
             while (true)
             {
                 if (lastHash != "") Thread.Sleep(2500);
-                Console.Write(".");
                 var g = CsGoGame.LastFromLogFile(consoleLog);
                 if (g == null)
                 {
@@ -46,8 +60,10 @@ namespace process_important_ticks
                 lastHash = g.GameHash;
                 Console.WriteLine();
                 Console.WriteLine(spacer);
-                Console.WriteLine("New Game: " + lastHash);
-                g.WriteDemoNavScript(writeScript);
+                Console.WriteLine("New Game found.");
+                Console.WriteLine("Hash:   {0}", lastHash.Substring(0, 6));
+                Console.WriteLine("Rounds: {0} (+{1} Warmup)", g.NumOfRoundsDrill, g.NumOfRoundsWarmup);
+                g.WriteDemoNavScript(gameScript);
                 Console.WriteLine(spacer);
                 Console.WriteLine();
             }

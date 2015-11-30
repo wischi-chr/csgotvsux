@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace process_important_ticks
+namespace csgotvsux
 {
     public class CsGoEvent
     {
